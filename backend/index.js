@@ -19,7 +19,7 @@ let options = {
     },
     // Logs options
     "logs": {
-        "enableConsoleLogs": true,
+        "enableConsoleLogs": false,
         "enableFileLogs": false,
         "color": true,
         "level": 'debug',
@@ -58,3 +58,18 @@ let rainbowSDK = new RainbowSDK(options);
 
 // Start the SDK
 rainbowSDK.start();
+
+rainbowSDK.events.on('rainbow_onstarted', function() {
+    // do something when the SDK has successfully started (the object is contructed, but the bot is not yet signed in, and the SDK's APIs are not ready to be used)
+    console.log("Rainbow SDK is started!");
+});
+
+rainbowSDK.events.on('rainbow_onconnected', function() {
+    // do something when the connection to Rainbow XMPP server is successfull (signin complete, but data for initialisation not yet retrieved)
+    console.log("Rainbow SDK is connected!");
+});
+
+rainbowSDK.events.on('rainbow_onready', function() {
+    // do something when the SDK is connected to Rainbow. It is this event which allows application to start the use of SDK's APIs.
+    console.log("Rainbow SDK is ready!");
+});
