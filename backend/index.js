@@ -73,3 +73,21 @@ rainbowSDK.events.on('rainbow_onready', function() {
     // do something when the SDK is connected to Rainbow. It is this event which allows application to start the use of SDK's APIs.
     console.log("Rainbow SDK is ready!");
 });
+
+rainbowSDK.events.on('rainbow_onconnectionerror', function(err) {
+    // do something when the connection can't be done with Rainbow (ie. issue on sign-in) 
+    // Application must start the sdk again.
+    console.log("Error when connecting to Rainbow: ", err);
+});
+
+rainbowSDK.events.on('rainbow_onfailed', function(err) {
+    // do something when the SDK didn't succeed to reconnect and stop trying
+    // Application must start the sdk again.
+    console.log("Error when reconnecting to Rainbow: ", err);
+});
+
+rainbowSDK.events.on('rainbow_onerror', function(err) {
+    // do something when something goes fatal on Xmpp server (ie: bad 'configurations' parameter...). 
+    // Application must start the sdk again.
+    console.log("Error when connecting to Rainbow (XMPP server): ", err);
+});
