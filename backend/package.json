@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "rainbow-node-sdk": "^2.25.2-lts.3"
+  }
+}
