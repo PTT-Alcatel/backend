@@ -9,6 +9,8 @@ services:
       - "3306:3306"
     env_file:
       - ./MySql/.env-mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
 
   nodejs-api:
     build:
@@ -20,3 +22,5 @@ services:
       - ./NodeJs/.env-nodejs
     depends_on:
       - mysql
+volumes:
+  mysql-data:
