@@ -9,7 +9,7 @@ FLUSH PRIVILEGES;
 
 USE PTT;
 
-create table bubble_location
+CREATE TABLE IF NOT EXISTS bubble_location
 (
     bubble_GUID int             AUTO_INCREMENT    primary key,
     name        varchar(255)    null,

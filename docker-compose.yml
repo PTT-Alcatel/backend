@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  mysql:
+    build:
+      context: ./MySql/
+      dockerfile: ./Dockerfile-mysql
+    ports:
+      - "3306:3306"
+    env_file:
+      - ./MySql/.env-mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  nodejs-api:
+    build:
+      context: ./NodeJs/
+      dockerfile: ./Dockerfile-nodejs
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./NodeJs/.env-nodejs
+    depends_on:
+      - mysql
+volumes:
+  mysql-data:
