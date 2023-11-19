@@ -3,7 +3,7 @@ Une fois que vous avez installé MySQL, pour tester en local :
 sudo mysql -u root
 CREATE USER 'alcatel'@'localhost' IDENTIFIED BY 'alcatel';
 CREATE DATABASE PTT; 
-GRANT PRIVILEGE ON PTT.* TO 'alcatel'@'localhost'; 
+GRANT ALL PRIVILEGES ON PTT.* TO 'alcatel'@'localhost'; 
 FLUSH PRIVILEGES; 
 */
 
@@ -11,9 +11,9 @@ USE PTT;
 
 create table bubble_location
 (
-    bubble_GUID int             not null    primary key,
+    bubble_GUID int             AUTO_INCREMENT    primary key,
     name        varchar(255)    null,
-    latitude    decimal(9,6)     not null,
+    latitude    decimal(9,6)    not null,
     longitude   decimal(9,6)    not null,
     creator     varchar(255)    not null
 );

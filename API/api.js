@@ -91,6 +91,25 @@ api.get('/bubbles', (req, res, next) => {
     })
 });
 
+// Define a route to create a new bubble
+api.post('/bubbles', (req, res, next) => {
+    const { name, latitude, longitude, creator } = req.body;
+    if (!name || !latitude || !longitude || !creator) {
+        return res.status(400).json({ error: 'Missing required fields.' });
+    }
+    pool.query(
+        'INSERT INTO bubble_location (name, latitude, longitude, creator) VALUES (?, ?, ?, ?)',
+        [name, latitude, longitude, creator],
+        (err, results) => {
+            if (err) {
+                next(err);
+            } else {
+                res.status(201).json({ message: 'Bubble added successfully.', insertId: results.insertId });
+            }
+        }
+    );
+});
+
 // Error handling middleware
 api.use((err, req, res, next) => {
     console.error("An error occured", err);
