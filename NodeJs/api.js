@@ -124,7 +124,11 @@ api.put('/bubbles/:id', (req, res, next) => {
             if (err) {
                 next(err);
             } else {
-                res.json({ message: 'Bubble updated successfully' });
+                if (results.affectedRows === 0) {
+                    res.status(404).json({ error: 'Bubble not found' });
+                } else {
+                    res.json({ message: 'Bubble updated successfully' });
+                }
             }
         }
     );
@@ -140,7 +144,11 @@ api.delete('/bubbles/:id', (req, res, next) => {
             if (err) {
                 next(err);
             } else {
-                res.json({ message: 'Bubble deleted successfully' });
+                if (results.affectedRows === 0) {
+                    res.status(404).json({ error: 'Bubble not found' });
+                } else {
+                    res.json({ message: 'Bubble deleted successfully' });
+                }
             }
         }
     );
