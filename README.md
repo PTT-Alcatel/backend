@@ -16,14 +16,28 @@ Assurez-vous d'avoir Docker et Docker Compose installés sur votre machine.
     sudo docker-compose up -d
     ```
 
-3. Accédez à l'API via la route "/bubbles".
-
-4. Possibilité d'affichage sous tableau HTML pour les tests en utilisant l'extension "/bubbles?format=html".
+3. Accédez à l'API via la route "/bubbles". Par exemple en utilisant cURL :
+    ```bash
+    curl http://localhost:3000/bubbles
+    ```
+    Possibilité d'affichage sous tableau HTML pour les tests en utilisant l'extension "/bubbles?format=html" dans votre navigateur.
 
 5. Pour insérer de nouvelles données, utilisez la route POST "/bubbles" avec le body de la requête contenant les informations nécessaires. Par exemple, en utilisant cURL :
 
     ```bash
-    curl -X POST -H "Content-Type: application/json" -d '{"name":"New Bubble", "lattitude":40.7128, "longitude":-74.0060, "creator":"John Doe"}' http://localhost:3000/bubbles
+    curl -X POST -H "Content-Type: application/json" -d '{"name":"New Bubble", "latitude":40.7128, "longitude":-74.0060, "creator":"John Doe"}' http://localhost:3000/bubbles
+    ```
+
+6. Pour mettre à jour une entrée existante, utilisez la route PUT "/bubbles/:id" avec le body de la requête contenant les informations mises à jour. Par exemple, en utilisant cURL :
+
+    ```bash
+    curl -X PUT -H "Content-Type: application/json" -d '{"name": "Bubble mis à jour", "latitude": 40.7128, "longitude": -74.0060, "creator": "Jane Doe"}' http://localhost:3000/bubbles/1
+    ```
+
+7. Pour supprimer une entrée existante, utilisez la route DELETE "/bubbles/:id". Par exemple, en utilisant cURL :
+
+    ```bash
+    curl -X DELETE http://localhost:3000/bubbles/1
     ```
 
 ## Configuration de l'environnement :
