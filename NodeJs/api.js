@@ -110,6 +110,42 @@ api.post('/bubbles', (req, res, next) => {
     );
 });
 
+// Update a bubble by ID
+api.put('/bubbles/:id', (req, res, next) => {
+    const bubbleId = req.params.id;
+    const { name, latitude, longitude, creator } = req.body;
+    if (!name || !latitude || !longitude || !creator) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+    pool.query(
+        'UPDATE bubble_location SET name=?, latitude=?, longitude=?, creator=? WHERE bubble_GUID=?',
+        [name, latitude, longitude, creator, bubbleId],
+        (err, results) => {
+            if (err) {
+                next(err);
+            } else {
+                res.json({ message: 'Bubble updated successfully' });
+            }
+        }
+    );
+});
+
+// Delete a bubble by ID
+api.delete('/bubbles/:id', (req, res, next) => {
+    const bubbleId = req.params.id;
+    pool.query(
+        'DELETE FROM bubble_location WHERE bubble_GUID=?',
+        [bubbleId],
+        (err, results) => {
+            if (err) {
+                next(err);
+            } else {
+                res.json({ message: 'Bubble deleted successfully' });
+            }
+        }
+    );
+});
+
 // Error handling middleware
 api.use((err, req, res, next) => {
     console.error("An error occured", err);
