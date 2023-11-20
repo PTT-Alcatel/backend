@@ -6,3 +6,6 @@ ENV MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-alcatel}
 ENV MYSQL_DATABASE=${MYSQL_DATABASE:-PTT}
 ENV MYSQL_USER=${MYSQL_USER:-alcatel}
 ENV MYSQL_PASSWORD=${MYSQL_PASSWORD:-alcatel}
+
+# Add the content of the sql-scripts/ directory to your image
+COPY create.sql /docker-entrypoint-initdb.d/
