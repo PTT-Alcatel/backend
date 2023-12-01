@@ -16,6 +16,7 @@ services:
     build:
       context: ./NodeJs/
       dockerfile: ./Dockerfile-nodejs
+    stop_signal: SIGINT
     ports:
       - "3000:3000"
     env_file:
