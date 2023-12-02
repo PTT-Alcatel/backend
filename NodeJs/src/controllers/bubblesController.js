@@ -1,6 +1,6 @@
 // Controller for the bubbles routes
 const bubblesService = require('../services/bubblesService');
-const errorHandler = require('../middlewares/errorHandler');
+const errorHandler = require('../middlewares/errorHandlerMiddleware');
 const bubble = require('../models/bubble');
 
 // Get all bubbles
