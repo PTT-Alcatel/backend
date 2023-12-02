@@ -1,6 +1,9 @@
 // Import Express
 const express = require('express');
 
+// Import Sequelize
+const sequelize = require('./config/sequelize');
+
 // Create an Express app instance
 const api = express();
 
@@ -8,6 +11,11 @@ const api = express();
 const errorHandler = require('./middlewares/errorHandlerMiddleware');
 const bubblesRoutes = require('./routes/bubblesRoute');
 const swaggerRoutes = require('./routes/swaggerRoute');
+
+// Sequelize: Sync the models with the database
+sequelize.sync().then(() => {
+    console.log('Database synchronized');
+});
 
 // Middleware: Parse incoming JSON requests
 api.use(express.json());

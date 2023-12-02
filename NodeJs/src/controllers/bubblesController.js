@@ -1,91 +1,73 @@
 // Controller for the bubbles routes
 const bubblesService = require('../services/bubblesService');
 const errorHandler = require('../middlewares/errorHandlerMiddleware');
-const bubble = require('../models/bubble');
 
 // Get all bubbles
-function getAllBubbles(req, res) {
-    // Call the getAllBubbles method from the Bubble model
-    bubble.getAllBubbles((err, results) => {
-        if (err) {
-            // If an error occurs, pass it to the errorHandler middleware
-            errorHandler(err, req, res);
-        } else {
-            // If successful, send the results as JSON in the response
-            res.json(results);
-        }
-    });
-};
+async function getAllBubbles(req, res) {
+    try {
+        const results = await bubblesService.getAllBubbles();
+        res.json(results);
+    } catch (err) {
+        errorHandler(err, req, res);
+    }
+}
 
 // Get a specific bubble by ID
-function getBubbleById(req, res) {
-    // Extract the bubble ID from the request parameters
-    const bubbleId = req.params.id;
-
-    // Call the getBubbleById method from the Bubble model
-    bubble.getBubbleById(bubbleId, (err, result) => {
-        if (err) {
-            // If an error occurs, pass it to the errorHandler middleware
-            errorHandler(err, req, res);
-        } else {
-            // If successful, send the result as JSON in the response
-            res.json(result);
+async function getBubbleById(req, res) {
+    try {
+        const bubbleId = req.params.id;
+        const bubble = await bubblesService.getBubbleById(bubbleId);
+        if (!bubble) {
+            res.status(404).json({ error: 'Bubble not found' });
+            return;
         }
-    });
-};
+        res.json(bubble);
+    } catch (err) {
+        errorHandler(err, req, res);
+    }
+}
 
 // Create a new bubble
-function createBubble(req, res) {
-    // Extract new bubble data from the request body
-    const newBubbleData = req.body;
-
-    // Call the createBubble method from the Bubble model
-    bubble.createBubble(newBubbleData, (err, result) => {
-        if (err) {
-            // If an error occurs, pass it to the errorHandler middleware
-            errorHandler(err, req, res);
-        } else {
-            // If successful, send the result as JSON in the response
-            res.json(result);
-        }
-    });
-};
+async function createBubble(req, res) {
+    try {
+        const newBubbleData = req.body;
+        const result = await bubblesService.createBubble(newBubbleData);
+        res.json(result);
+    } catch (err) {
+        errorHandler(err, req, res);
+    }
+}
 
 // Update a bubble
-function updateBubble(req, res) {
-    // Extract the bubble ID from the request parameters
-    const bubbleId = req.params.id;
-    // Extract updated bubble data from the request body
-    const updatedBubbleData = req.body;
-
-    // Call the updateBubble method from the Bubble model
-    bubble.updateBubble(bubbleId, updatedBubbleData, (err, result) => {
-        if (err) {
-            // If an error occurs, pass it to the errorHandler middleware
-            errorHandler(err, req, res);
-        } else {
-            // If successful, send the result as JSON in the response
-            res.json(result);
+async function updateBubble(req, res) {
+    try {
+        const bubbleId = req.params.id;
+        const updatedBubbleData = req.body;
+        const [rowsAffected, message] = await bubblesService.updateBubble(bubbleId, updatedBubbleData);
+        if (rowsAffected === 0) {
+            res.status(404).json({ error: 'Bubble not found' });
+            return;
         }
-    });
-};
+        res.json({ message });
+    } catch (err) {
+        errorHandler(err, req, res);
+    }
+}
 
 // Delete a bubble
-function deleteBubble(req, res) {
-    // Extract the bubble ID from the request parameters
-    const bubbleId = req.params.id;
-
-    // Call the deleteBubble method from the Bubble model
-    bubble.deleteBubble(bubbleId, (err, result) => {
-        if (err) {
-            // If an error occurs, pass it to the errorHandler middleware
-            errorHandler(err, req, res);
-        } else {
-            // If successful, send the result as JSON in the response
-            res.json(result);
+async function deleteBubble(req, res) {
+    try {
+        const bubbleId = req.params.id;
+        const [rowsAffected, message] = await bubblesService.deleteBubble(bubbleId);
+        if (rowsAffected === 0) {
+            res.status(404).json({ error: 'Bubble not found' });
+            return;
         }
-    });
-};
+        res.json({ message });
+    } catch (err) {
+        errorHandler(err, req, res);
+    }
+}
 
 // Export the controller functions for use in other parts of the application
 module.exports = {
