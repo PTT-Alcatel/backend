@@ -1,20 +1,22 @@
-// Import the Express module
+// Import Express
 const express = require('express');
 
-// Create an instance of the Express application
+// Create an Express app instance
 const api = express();
 
-// Import routes for handling bubble-related requests
+// Import middleware and routes
+const errorHandler = require('./middlewares/errorHandlerMiddleware');
 const bubblesRoutes = require('./routes/bubblesRoute');
-
-// Import the error handler middleware
-const errorHandler = require('./middlewares/errorHandler');
+const swaggerRoutes = require('./routes/swaggerRoute');
 
 // Middleware: Parse incoming JSON requests
 api.use(express.json());
 
-// Middleware: Use the 'bubblesRoutes' to handle requests at the root path '/'
+// Routes: Use the 'bubblesRoutes' for handling bubble-related requests
 api.use('/', bubblesRoutes);
+
+// Routes: Use the 'swaggerRoutes' for handling swagger-related requests
+api.use('/', swaggerRoutes);
 
 // Middleware: Use the 'errorHandler' to handle errors globally
 api.use(errorHandler);
