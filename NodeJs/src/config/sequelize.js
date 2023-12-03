@@ -14,6 +14,8 @@ async function testConnection() {
     }
 }
 
-testConnection();
+setTimeout(() => {
+    testConnection();
+}, 3000);
 
 module.exports = sequelize;

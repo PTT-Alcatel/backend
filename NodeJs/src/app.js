@@ -13,9 +13,11 @@ const bubblesRoutes = require('./routes/bubblesRoute');
 const swaggerRoutes = require('./routes/swaggerRoute');
 
 // Sequelize: Sync the models with the database
-sequelize.sync().then(() => {
-    console.log('Database synchronized');
-});
+setTimeout(() => {
+    sequelize.sync().then(() => {
+        console.log('Database synchronized');
+    });
+}, 4000);
 
 // Middleware: Parse incoming JSON requests
 api.use(express.json());
