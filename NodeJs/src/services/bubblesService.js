@@ -16,14 +16,14 @@ class BubbleService {
 
     static async updateBubble(bubbleId, updatedBubbleData) {
         const [rowsAffected] = await Bubble.update(updatedBubbleData, {
-            where: { bubble_GUID: bubbleId },
+            where: { id: bubbleId },
         });
         return [rowsAffected, rowsAffected === 0 ? 'Bubble not found' : 'Bubble updated successfully'];
     }
 
     static async deleteBubble(bubbleId) {
         const rowsAffected = await Bubble.destroy({
-            where: { bubble_GUID: bubbleId },
+            where: { id: bubbleId },
         });
         return [rowsAffected, rowsAffected === 0 ? 'Bubble not found' : 'Bubble deleted successfully'];
     }

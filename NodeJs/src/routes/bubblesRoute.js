@@ -17,19 +17,22 @@ const bubblesController = require('../controllers/bubblesController');
  *     Bubble:
  *       type: object
  *       properties:
+ *         id:
+ *          type: string
  *         name:
  *           type: string
  *         latitude:
  *           type: number
  *         longitude:
  *           type: number
- *         creator:
+ *         creatorId:
  *           type: string
  *       required:
+ *         - id
  *         - name
  *         - latitude
  *         - longitude
- *         - creator
+ *         - creatorId
  */
 
 /**
@@ -60,7 +63,7 @@ router.get('/bubbles', bubblesController.getAllBubbles);
  *         description: ID of the bubble
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       200:
  *         description: OK
@@ -85,10 +88,11 @@ router.get('/bubbles/:id', bubblesController.getBubbleById);
  *           schema:
  *             $ref: '#/components/schemas/Bubble'
  *           example:
+ *             id: '65a59df51b1b20c6d3557068'
  *             name: 'UIMM Alsace'
  *             latitude: 48.590650
  *             longitude: 7.685010
- *             creator: "Golem XIV"
+ *             creatorId: "64396411edeb0f5ad6c4fe8a"
  *     responses:
  *       200:
  *         description: Bubble created successfully
@@ -112,7 +116,7 @@ router.post('/bubbles', bubblesController.createBubble);
  *         description: ID of the bubble
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -120,10 +124,11 @@ router.post('/bubbles', bubblesController.createBubble);
  *           schema:
  *             $ref: '#/components/schemas/Bubble'
  *           example:
+ *             id: '65a59df51b1b20c6d3557068'
  *             name: 'Bulle modifiée'
  *             latitude: 48.590650
  *             longitude: 7.685010
- *             creator: "Bulle modifiée"
+ *             creatorId: "64396411edeb0f5ad6c4fe8a"
  *     responses:
  *       200:
  *         description: Bubble updated successfully
@@ -147,7 +152,7 @@ router.put('/bubbles/:id', bubblesController.updateBubble);
  *         description: ID of the bubble
  *         required: true
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       200:
  *         description: Bubble deleted successfully

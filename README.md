@@ -2,7 +2,15 @@
 
 Bienvenue dans le projet Node.js avec une base de données MySQL. Ce projet est une API simple utilisant Express pour créer un serveur web et MySQL2 comme pilote de base de données afin de communiquer avec l'application Android frontend.
 
-## Utilisation sous Docker :
+## Utilisation de swagger :
+
+Le projet utilise Swagger pour la documentation de l'API. Pour accéder à la documentation, lancez le serveur et accédez à la route "/api-docs" dans votre navigateur.
+
+```bash
+http://localhost:3000/api-docs
+```
+
+## Installation sous Docker :
 
 Assurez-vous d'avoir Docker et Docker Compose installés sur votre machine.
 

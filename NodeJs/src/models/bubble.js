@@ -6,9 +6,8 @@ class Bubble extends Model { }
 
 Bubble.init(
     {
-        bubble_GUID: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
+        id: {
+            type: DataTypes.STRING,
             primaryKey: true,
         },
         name: {
@@ -23,7 +22,7 @@ Bubble.init(
             type: DataTypes.FLOAT,
             allowNull: false,
         },
-        creator: {
+        creatorId: {
             type: DataTypes.STRING,
             allowNull: false,
         },
