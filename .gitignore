@@ -1,0 +1,6 @@
+# Ignore node.js modules
+/node_modules
+
+# Ignore all .env files
+**/.env-mysql
+**/.env-nodejs
